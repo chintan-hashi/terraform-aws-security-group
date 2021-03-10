@@ -40,7 +40,7 @@ variable "to_port" {
   type        = number
 }
 
-variable "Protocol" {
+variable "protocol" {
   description = "Protocol Name - TCP, UDP etc."
   type        = string
   default     = "TCP"
