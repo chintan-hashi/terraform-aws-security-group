@@ -2,11 +2,7 @@
 # Get ID of created Security Group
 ##################################
 locals {
-  this_sg_id = concat(
-    aws_security_group.this.*.id,
-    aws_security_group.this_name_prefix.*.id,
-    [""],
-  )[0]
+  this_sg_id = aws_security_group.this.*.id
 }
 
 
