@@ -15,49 +15,12 @@ resource "aws_security_group" "this" {
   description            = var.description
   vpc_id                 = var.vpc_id
 
+  ingress {
+    description = var.rule_description
+    from_port   = var.from_port
+    to_port     = var.to_port
+    protocol    = var.protocol
+    cidr_blocks = var.cidr_block
+  }
+
 }
-
-###################################
-# Ingress - List of rules (simple)
-###################################
-# Security group rules with "cidr_blocks" and it uses list of rules names
-resource "aws_security_group_rule" "ingress_rules" {
-
-  security_group_id = local.this_sg_id
-  type              = "ingress"
-
-  cidr_blocks      = var.ingress_cidr_blocks
-  description      = var.ingress_with_cidr_blocks[1][3]
-
-  from_port = var.ingress_with_cidr_blocks[1][0]
-  to_port   = var.ingress_with_cidr_blocks[1][1]
-  protocol  = var.ingress_with_cidr_blocks[1][2]
-}
-
-#################
-# End of ingress
-#################
-
-##################################
-# Egress - List of rules (simple)
-##################################
-# Security group rules with "cidr_blocks" and it uses list of rules names
-#resource "aws_security_group_rule" "egress_rules" {
-#  count = var.create ? length(var.egress_rules) : 0
-#
-#  security_group_id = local.this_sg_id
-#  type              = "egress"
-#
-#  cidr_blocks      = var.egress_cidr_blocks
-#  ipv6_cidr_blocks = var.egress_ipv6_cidr_blocks
-#  prefix_list_ids  = var.egress_prefix_list_ids
-#  description      = var.rules[var.egress_rules[count.index]][3]
-#
-#  from_port = var.rules[var.egress_rules[count.index]][0]
-#  to_port   = var.rules[var.egress_rules[count.index]][1]
-#  protocol  = var.rules[var.egress_rules[count.index]][2]
-#}
-
-################
-# End of egress
-################

@@ -1,11 +1,6 @@
 #################
 # Security group
 #################
-variable "create" {
-  description = "Whether to create security group and all rules"
-  type        = bool
-  default     = true
-}
 
 variable "vpc_id" {
   description = "ID of the VPC where to create security group"
@@ -29,20 +24,29 @@ variable "description" {
 ##########
 # Ingress
 ##########
-variable "ingress_rules" {
-  description = "List of ingress rules to create by name"
-  type        = list(string)
-  default     = []
+
+variable "rule_description" {
+  description = "Description of ingress rule"
+  type        = string
 }
 
-variable "ingress_with_cidr_blocks" {
-  description = "List of ingress rules to create where 'cidr_blocks' is used"
-  type        = list(map(string))
-  default     = []
+variable "from_port" {
+  description = "Start Port"
+  type        = number
 }
 
-variable "ingress_cidr_blocks" {
-  description = "List of IPv4 CIDR ranges to use on all ingress rules"
+variable "to_port" {
+  description = "End Port"
+  type        = number
+}
+
+variable "Protocol" {
+  description = "Protocol Name - TCP, UDP etc."
+  type        = string
+  default     = "TCP"
+}
+
+variable "cidr_block" {
+  description = "CIDR block for ingress rule - ["10.0.0.0/16"]"
   type        = list(string)
-  default     = []
 }
