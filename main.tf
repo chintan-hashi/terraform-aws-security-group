@@ -28,11 +28,11 @@ resource "aws_security_group_rule" "ingress_rules" {
   type              = "ingress"
 
   cidr_blocks      = var.ingress_cidr_blocks
-  description      = var.rules[var.ingress_rules[count.index]][3]
+  description      = var.ingress_rules[count.index][3]
 
-  from_port = var.rules[var.ingress_rules[count.index]][0]
-  to_port   = var.rules[var.ingress_rules[count.index]][1]
-  protocol  = var.rules[var.ingress_rules[count.index]][2]
+  from_port = var.ingress_rules[count.index][0]
+  to_port   = var.ingress_rules[count.index][1]
+  protocol  = var.ingress_rules[count.index][2]
 }
 
 #################
