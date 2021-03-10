@@ -22,17 +22,16 @@ resource "aws_security_group" "this" {
 ###################################
 # Security group rules with "cidr_blocks" and it uses list of rules names
 resource "aws_security_group_rule" "ingress_rules" {
-  count = var.create ? length(var.ingress_rules) : 0
 
   security_group_id = local.this_sg_id
   type              = "ingress"
 
   cidr_blocks      = var.ingress_cidr_blocks
-  description      = var.ingress_with_cidr_blocks[count.index][3]
+  description      = var.ingress_with_cidr_blocks[1][3]
 
-  from_port = var.ingress_with_cidr_blocks[count.index][0]
-  to_port   = var.ingress_with_cidr_blocks[count.index][1]
-  protocol  = var.ingress_with_cidr_blocks[count.index][2]
+  from_port = var.ingress_with_cidr_blocks[1][0]
+  to_port   = var.ingress_with_cidr_blocks[1][1]
+  protocol  = var.ingress_with_cidr_blocks[1][2]
 }
 
 #################
